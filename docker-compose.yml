@@ -1,0 +1,65 @@
+x-node: &node
+  image: poker-distribuido
+  build: .
+  depends_on: [registry]
+
+x-node-env: &node-env
+  REGISTRY_URL: http://registry:7000
+  CLUSTER_SIZE: "6"
+
+services:
+  registry:
+    image: poker-distribuido
+    build: .
+    command: ["node", "dist/src/registry.js"]
+    environment:
+      PORT: "7000"
+    ports: ["7000:7000"]
+
+  node1:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "1"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8001
+    ports: ["8001:8000"]
+
+  node2:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "2"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8002
+    ports: ["8002:8000"]
+
+  node3:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "3"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8003
+    ports: ["8003:8000"]
+
+  node4:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "4"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8004
+    ports: ["8004:8000"]
+
+  node5:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "5"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8005
+    ports: ["8005:8000"]
+
+  node6:
+    <<: *node
+    environment:
+      <<: *node-env
+      NODE_ID: "6"
+      PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8006
+    ports: ["8006:8000"]

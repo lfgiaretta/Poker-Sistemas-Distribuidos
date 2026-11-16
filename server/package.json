@@ -1,0 +1,28 @@
+{
+  "name": "@poker/server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/src/main.js",
+    "start:registry": "node dist/src/registry.js",
+    "dev": "tsx watch src/main.ts",
+    "test": "vitest run --passWithNoTests",
+    "cluster": "tsx scripts/run-local.ts",
+    "bot": "tsx scripts/bot.ts",
+    "failover": "tsx scripts/failover-test.ts"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
